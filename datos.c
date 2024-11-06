@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include "formula.h"
+#include <string.h>
+#include <stdbool.h>
+#include <time.h>
+char usuarioGlobal[100];
 
 void mostrarOpciones() {
     printf("\nSeleccione una figura geométrica:\n");
@@ -19,7 +23,6 @@ void mostrarResultadosFiguras(float superficie, float volumen) {
     printf("\nResultados:\n");
     printf("Superficie: %.2f\n", superficie);
     printf("Volumen: %.2f\n", volumen);
-    printf("\n");
 }
 
 void mostrarResultadosFiguras2D(float area, float perimetro) {
@@ -47,21 +50,22 @@ bool login(const char *nombreArchivo) {
     archivo = fopen(nombreArchivo, "r");
     if (archivo != NULL) {
         while (fscanf(archivo, "%49[^-]-%49s\n", usuarioFile, contrafile) != EOF) {
-            if (strcmp(usuario, usuarioFile) == 0 && strcmp(contra, contrafile) == 0)>
+            if (strcmp(usuario, usuarioFile) == 0 && strcmp(contra, contrafile) == 0) {
                 printf("Acceso permitido\n");
                 esValido = true;
                 strcpy(usuarioGlobal, usuario);
                 break;
             }
         }
-		}
-        if (!esValido) {
-            printf("Usuario o contraseña incorrecta\n");
-        }
-        fclose(archivo);
+        fclose(archivo);  // Mueve el fclose dentro del bloque
     } else {
         printf("Error al abrir el archivo.\n");
     }
+
+    if (!esValido) {
+        printf("Usuario o contraseña incorrecta\n");
+    }
+
     return esValido;
 }
 
@@ -83,7 +87,6 @@ void crearUsuario() {
     printf("Datos guardados con exito\n");
 }
 
-
 void crearBitacora(char usuario[], char texto[]) {
     FILE *archivo;
     time_t t = time(NULL);
@@ -95,8 +98,8 @@ void crearBitacora(char usuario[], char texto[]) {
                 fechaHoy.tm_year + 1900,  // Año
                 fechaHoy.tm_mon + 1,      // Mes
                 fechaHoy.tm_mday,         // Día
-                usuario,                  
-                texto);                   
+                usuario,
+                texto);
         fclose(archivo);
     } else {
         printf("Error al abrir el archivo de bitácora.\n");

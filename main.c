@@ -1,10 +1,14 @@
 #include <stdio.h>
 #include "formula.h"
+#include <stdbool.h>
 
 int main() {
     int figura;
     int opcion = 1;
-    float superficie, volumen;
+    float superficie, volumen, area, perimetro;
+    int opcionLogin = 0;
+    int opcionBucle = 0;
+    bool verificacion = false;
 
 	while (opcionLogin != 3 && opcionBucle != 1 ) {
         printf("1. Iniciar sesión\n2. Crear usuario\n3. Salir\n");
@@ -25,14 +29,11 @@ int main() {
             printf("Usuario creado. Por favor inicie sesión.\n");
         } else if (opcionLogin == 3) {
             printf("Gracias por usar el sistema.\n");
-            return 0; 
+            return 0;
         } else {
             printf("Opción ingresada incorrecta.\n");
         }
     }
-
-
-
 
 
     while (opcion) {
@@ -47,6 +48,7 @@ int main() {
                 superficie = superficieCubo(lado);
                 volumen = volumenCubo(lado);
                 mostrarResultadosFiguras(superficie, volumen);
+		crearBitacora(usuarioGlobal,"Cubo");
                 break;
             }
 
@@ -61,6 +63,7 @@ int main() {
                 superficie = superficieCuboide(largo, ancho, altura);
                 volumen = volumenCuboide(largo, ancho, altura);
                 mostrarResultadosFiguras(superficie, volumen);
+		crearBitacora(usuarioGlobal,"Cuboide");
                 break;
             }
             case 3: {
@@ -72,6 +75,7 @@ int main() {
                 superficie = superficieCilindro(radio, altura);
                 volumen = volumenCilindro(radio, altura);
                 mostrarResultadosFiguras(superficie, volumen);
+		crearBitacora(usuarioGlobal,"Cilindro");
                 break;
             }
 
@@ -82,6 +86,7 @@ int main() {
                 superficie = superficieEsfera(radio);
                 volumen = volumenEsfera(radio);
                 mostrarResultadosFiguras(superficie, volumen);
+		crearBitacora(usuarioGlobal,"Esfera");
                 break;
             }
 
@@ -94,28 +99,33 @@ int main() {
                 superficie = superficieCono(radio, altura);
                 volumen = volumenCono(radio, altura);
                 mostrarResultadosFiguras(superficie, volumen);
+		crearBitacora(usuarioGlobal,"Cono");
                 break;
             }
             case 6: {
                 float base, altura, lado1, lado2, lado3;
-                printf("Ingrese la base y altura del triángulo: ");
-                scanf("%f %f", &base, &altura);
-                printf("Ingrese los tres lados del triángulo: ");
+                printf("Ingrese la base del triángulo: ");
+                scanf("%f", &base);
+		printf("Ingrese la altura del triángulo: ");
+                scanf("%f", &altura);
+                printf("Ingrese los tres lados del triángulo(formato: n n n): ");
                 scanf("%f %f %f", &lado1, &lado2, &lado3);
                 area = areaTriangulo(base, altura);
                 perimetro = perimetroTriangulo(lado1, lado2, lado3);
                 mostrarResultadosFiguras2D(area, perimetro);
+		crearBitacora(usuarioGlobal,"Triangulo");
                 break;
             }
             case 7: {
                 float base, altura, lado;
-                printf("Ingrese la base y altura del paralelogramo: ");
+                printf("Ingrese la base y altura del paralelogramo(formato: n n): ");
                 scanf("%f %f", &base, &altura);
                 printf("Ingrese el lado del paralelogramo: ");
                 scanf("%f", &lado);
                 area = areaParalelogramo(base, altura);
                 perimetro = perimetroParalelogramo(base, lado);
                 mostrarResultadosFiguras2D(area, perimetro);
+		crearBitacora(usuarioGlobal,"Paralelogramo");
                 break;
             }
             case 8: {
@@ -125,37 +135,43 @@ int main() {
                 area = areaCuadrado(lado);
                 perimetro = perimetroCuadrado(lado);
                 mostrarResultadosFiguras2D(area, perimetro);
+		crearBitacora(usuarioGlobal,"Cuadrado");
                 break;
             }
             case 9: {
                 float base, altura;
-                printf("Ingrese la base y altura del rectángulo: ");
+                printf("Ingrese la base y altura del rectángulo(formato: n n): ");
                 scanf("%f %f", &base, &altura);
                 area = areaRectangulo(base, altura);
                 perimetro = perimetroRectangulo(base, altura);
                 mostrarResultadosFiguras2D(area, perimetro);
+		crearBitacora(usuarioGlobal,"rectangulo");
                 break;
             }
             case 10: {
                 float diagonal1, diagonal2, lado;
                 printf("Ingrese las diagonales del rombo: ");
-                scanf("%f %f", &diagonal1, &diagonal2);
+                scanf("%f", &diagonal1);
+		printf("Ingrese las diagonales del rombo: ");
+                scanf("%f", &diagonal2);
                 printf("Ingrese el lado del rombo: ");
                 scanf("%f", &lado);
                 area = areaRombo(diagonal1, diagonal2);
                 perimetro = perimetroRombo(lado);
                 mostrarResultadosFiguras2D(area, perimetro);
+		crearBitacora(usuarioGlobal,"Rombo");
                 break;
             }
             case 11: {
                 float baseMayor, baseMenor, altura, lado1, lado2;
-                printf("Ingrese las bases y altura del trapecio: ");
+                printf("Ingrese las bases y altura del trapecio(formato: n n n): ");
                 scanf("%f %f %f", &baseMayor, &baseMenor, &altura);
-                printf("Ingrese los otros dos lados del trapecio: ");
+                printf("Ingrese los otros dos lados del trapecio(formato: n n): ");
                 scanf("%f %f", &lado1, &lado2);
                 area = areaTrapecio(baseMayor, baseMenor, altura);
                 perimetro = perimetroTrapecio(lado1, lado2, baseMayor, baseMenor);
                 mostrarResultadosFiguras2D(area, perimetro);
+		crearBitacora(usuarioGlobal,"Trapecio");
                 break;
             }
             case 12: {
@@ -165,16 +181,18 @@ int main() {
                 area = areaCirculo(radio);
                 perimetro = perimetroCirculo(radio);
                 mostrarResultadosFiguras2D(area, perimetro);
+		crearBitacora(usuarioGlobal,"Circulo");
                 break;
             }
             case 13: {
                 float lado, apotema;
                 int numeroLados;
-                printf("Ingrese el número de lados, la longitud del lado y la apotema del polígono regular: ");
+                printf("Ingrese el número de lados, la longitud del lado y la apotema del polígono regular(formato: n n n): ");
                 scanf("%d %f %f", &numeroLados, &lado, &apotema);
                 area = areaPoligonoRegular(lado, numeroLados, apotema);
                 perimetro = perimetroPoligonoRegular(lado, numeroLados);
                 mostrarResultadosFiguras2D(area, perimetro);
+		crearBitacora(usuarioGlobal,"Poligono Regular");
                 break;
             }
             default:
@@ -185,7 +203,7 @@ int main() {
         printf("¿Desea analizar otra figura? (1 para sí, 0 para no): ");
         scanf("%d", &opcion);
     }
-
+    crearBitacora(usuarioGlobal,"Salida del sistema");
     printf("Programa finalizado.\n");
     return 0;
 }

@@ -1,4 +1,8 @@
 #include <stdio.h>
+#include <stdbool.h>
+
+extern char usuarioGlobal[100];
+
 
 void mostrarOpciones();
 
