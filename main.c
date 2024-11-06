@@ -6,6 +6,35 @@ int main() {
     int opcion = 1;
     float superficie, volumen;
 
+	while (opcionLogin != 3 && opcionBucle != 1 ) {
+        printf("1. Iniciar sesión\n2. Crear usuario\n3. Salir\n");
+        scanf("%d", &opcionLogin);
+        if (opcionLogin == 1) {
+            verificacion = login("Usuarios.txt");
+            if (verificacion) {
+                printf("Ingreso exitoso, puede entrar al sistema.\n");
+                opcionBucle = 1;
+                crearBitacora(usuarioGlobal, "Ingreso exitoso al sistema");
+            } else {
+                printf("Ingreso fallido, no puede entrar al sistema.\n");
+                printf("Usuario o contraseña inválidos.\n");
+                crearBitacora(usuarioGlobal,"Ingreso fallido usuario/clave erróneo");
+            }
+        } else if (opcionLogin == 2) {
+            crearUsuario();
+            printf("Usuario creado. Por favor inicie sesión.\n");
+        } else if (opcionLogin == 3) {
+            printf("Gracias por usar el sistema.\n");
+            return 0; 
+        } else {
+            printf("Opción ingresada incorrecta.\n");
+        }
+    }
+
+
+
+
+
     while (opcion) {
         mostrarOpciones();
         figura = solicitarFigura();

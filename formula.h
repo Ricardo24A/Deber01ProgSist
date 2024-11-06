@@ -62,3 +62,12 @@ float perimetroPoligonoRegular(float lado, int numeroLados);
 
 void mostrarResultadosFiguras2D(float area, float perimetro);
 
+// Funciones login
+
+bool login(const char *nombreArchivo);
+
+void pedirDatos(char *usuario, char *contra);
+
+void crearUsuario();
+
+void crearBitacora(char usuario[], char texto[]);
